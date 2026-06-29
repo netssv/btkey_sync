@@ -1,9 +1,15 @@
 [project]
-name = "btkey_sync"
+name = "Btkey-Sync"
 version = "0.1.0"
-description = "Sincronize bondings Bluetooth LE between Windows and Linux in dual boot setups"
+description = "Synchronize Bluetooth LE and Classic bond keys between Windows and Linux in dual-boot setups"
+readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.10"
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/netssv/btkey_sync"
+Repository = "https://github.com/netssv/btkey_sync"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
@@ -16,7 +22,27 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["backends", "exporters", "importers"]
+include = ["backends", "backends.*", "exporters", "exporters.*", "importers", "importers.*"]
+
+[tool.setuptools.py-modules]
+# Flat modules at the root level
+include = [
+  "cli",
+  "tui_helpers",
+  "models",
+  "platform_detect",
+  "storage",
+  "actions",
+  "actions_classic",
+  "actions_classic_extra",
+  "actions_clone",
+  "actions_common",
+  "actions_help",
+  "actions_remove",
+  "actions_show",
+  "actions_verify",
+  "actions_windows",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
