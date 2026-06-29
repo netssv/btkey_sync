@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\700894937778\6878561135ad]
+"LTK"=hex:33,22,11,66,55,44,99,88,77,22,11,00,55,44,33,66
+"KeyLength"=dword:00000010
+"ERand"=hex(b):fe,f7,be,f5,ae,73,9a,d6
+"EDIV"=dword:00003f07
+"AuthReq"=dword:0000002d

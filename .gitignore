@@ -1,0 +1,32 @@
+# Material criptográfico de bonding real -- nunca debe subirse a control de versiones
+exports/*.reg
+exports/*.json
+!exports/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+build/
+dist/
+
+# Entornos
+.venv/
+venv/
+env/
+ENV/
+
+# IDE and System Caches
+.gemini/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+mcp_config_tmp.json
+AGENTS.md
+CLASSIC_SUPPORT.agent.md
+REQUIREMENTS.md
