@@ -1,6 +1,6 @@
 [project]
 name = "Btkey-Sync"
-version = "0.1.0"
+version = "0.1.1"
 description = "Synchronize Bluetooth LE and Classic bond keys between Windows and Linux in dual-boot setups"
 readme = "README.md"
 license = { text = "MIT" }
@@ -18,15 +18,14 @@ dev = ["pytest>=7.0"]
 btkey-sync = "cli:main"
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["backends", "backends.*", "exporters", "exporters.*", "importers", "importers.*"]
 
-[tool.setuptools.py-modules]
-# Flat modules at the root level
-include = [
+[tool.setuptools]
+py-modules = [
   "cli",
   "tui_helpers",
   "models",
