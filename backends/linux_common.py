@@ -15,6 +15,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+def get_section(config, name: str):
+    """Return config[name], creating the section first if needed.
+
+    Do NOT use `config.setdefault(name, {})[key] = v`: for a missing section it
+    returns the throwaway `{}` default (not the new section), so `v` is lost.
+    """
+    if not config.has_section(name):
+        config.add_section(name)
+    return config[name]
+
+
 def set_info_permissions(info_path: Path) -> None:
     """Set ownership root:root and mode 600 on a BlueZ info file."""
     if not info_path.exists():

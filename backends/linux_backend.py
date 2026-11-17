@@ -16,7 +16,7 @@ from . import linux_classic as _classic
 from .linux_common import (
     set_info_permissions, backup_info_file, remove_bond_directory,
     restart_bluetooth_daemon, stop_bluetooth_daemon, start_bluetooth_daemon,
-    check_active_link, disable_discovery_if_active,
+    check_active_link, disable_discovery_if_active, get_section,
 )
 
 BLUETOOTH_DIR = Path("/var/lib/bluetooth")
@@ -139,19 +139,19 @@ class LinuxBluetoothBackend(BluetoothBackend):
         techs = config["General"].get("SupportedTechnologies", "")
         if is_classic:
             config["General"]["SupportedTechnologies"] = "BR/EDR;LE;" if "LE;" in techs else "BR/EDR;"
-            config.setdefault("LinkKey", {})["Key"] = bond.ltk_hex
+            get_section(config, "LinkKey")["Key"] = bond.ltk_hex
             config["LinkKey"].setdefault("Type", "4")
             config["LinkKey"].setdefault("PINLength", "0")
         else:
             config["General"]["SupportedTechnologies"] = "BR/EDR;LE;" if ("BR/EDR;" in techs or "LinkKey" in config) else "LE;"
-            config.setdefault("LongTermKey", {})["Key"] = bond.ltk_hex
+            get_section(config, "LongTermKey")["Key"] = bond.ltk_hex
             config["LongTermKey"].update({
                 "Authenticated": "0", "EncSize": str(bond.key_length),
                 "EDiv": str(bond.ediv), "Rand": str(bond.erand),
             })
 
         if bond.irk_hex:
-            config.setdefault("IdentityResolvingKey", {})["Key"] = bond.irk_hex
+            get_section(config, "IdentityResolvingKey")["Key"] = bond.irk_hex
             config["IdentityResolvingKey"]["EncSize"] = "16"
 
         target_dir.mkdir(parents=True, exist_ok=True)
